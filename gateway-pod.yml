@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: gateway-pod
+  lables:
+    app: gateway
+    type: microservice
+spec:
+  containers:
+    - name: gateway-app
+      image: babellearning/serviciosapigateway:latest
+      ports:
+        - containerPort:80

@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: microservice-libreria-deploy
+  lables:
+    app: microservice-libreria-deploy
+    type: microservice
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: microservice-libreria
+      type: microservice
+    template:
+      metadata:
+        name: microservice-libreria-pod
+        lables:
+          app: microservice-libreria
+          type: microservice
+      spec:
+        containers:
+          - name: microservice-libreria-app
+            image: babellearning/serviciosapilibreria:latest
+            ports:
+              - containerPort:80

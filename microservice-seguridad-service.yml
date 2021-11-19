@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: microservice-seguridad-service
+  labels:
+    name: microservice-seguridad-service
+    app: microservice
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 80
+  selector:
+    app: microservice-seguridad
+    type: microservice

@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metada:
+  name: gateway-deploy
+  lables:
+    app: gateway-deploy
+    type: microservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gateway
+      type: microservice
+    template:
+     metadata:
+        name: gateway-pod
+        lables:
+          app: gateway
+          type: microservice
+     spec:
+        containers:
+          - name: gateway-app
+            image: babellearning/serviciosapigateway:latest
+            ports:
+              - containerPort:80

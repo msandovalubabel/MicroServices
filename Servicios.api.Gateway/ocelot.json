@@ -1,0 +1,153 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/LibreriaServicio/autorGenerico",
+      "DownstreamShema": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "microservice-libreria-service",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/autorLista",
+      "UpstreamHttpMethod": [ "POST", "GET", "UPDATE", "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/LibreriaAutor",
+      "DownstreamShema": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "microservice-libreria-service",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/autor",
+      "UpstreamHttpMethod": [ "POST", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "Key": "ListaAutores"
+    },
+    {
+      "DownstreamPathTemplate": "/api/LibreriaAutor/{id}",
+      "DownstreamShema": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "microservice-libreria-service",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/autor/{id}",
+      "UpstreamHttpMethod": [ "GET", "UPDATE", "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/LibreriaAutor/pagination",
+      "DownstreamShema": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "microservice-libreria-service",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/autor/pagination",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/identity/authentication",
+      "DownstreamShema": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "microservice-seguridad-service",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/usuario/login",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/identity",
+      "DownstreamShema": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "microservice-seguridad-service",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/usuario",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Libro",
+      "DownstreamShema": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "microservice-seguridad-service",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/libro",
+      "UpstreamHttpMethod": [ "POST", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "Key": "ListaLibros"
+    },
+    {
+      "DownstreamPathTemplate": "/api/Libro/{id}",
+      "DownstreamShema": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "microservice-libreria-service",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/libro/{id}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "DelegatingHandlers": [ "LibroHandler" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Libro/pagination",
+      "DownstreamShema": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "microservice-libreria-service",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/libro/pagination",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    }
+  ],
+  "Aggregates": [
+    {
+      "RouteKeys": [
+        "ListaAutores",
+        "ListaLibros"
+      ],
+      "UpstreamPathTemplate": "/librosautores"
+    }
+  ]
+}
